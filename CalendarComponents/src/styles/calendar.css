@@ -1,0 +1,161 @@
+
+
+.calendarBox
+{
+    overflow: hidden;
+
+    width: 422px;
+    height: 570px;
+    margin: 0 auto;
+    margin-top: 20px;
+
+    -webkit-transform: translate3d(0, 0, 0);
+       -moz-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+}
+
+
+.headerborder
+{
+    position: relative;
+    z-index: 100;
+
+    width: 422px;
+    height: 70px;
+
+    text-align: center;
+
+    background: rgba(66, 66, 66, 1);
+}
+.headermonth
+{
+    font-size: 20px;
+    font-weight: 100;
+    line-height: 44px;
+
+    margin: 0;
+    padding: 0;
+
+    letter-spacing: 1px;
+
+    color: #1cddb1;
+}
+.headeryear
+{
+    font-size: 12px;
+    font-weight: 100;
+    line-height: 24px;
+
+    margin: 0;
+    padding: 0;
+
+    letter-spacing: 1px;
+}
+.last-month,
+.next-month
+{
+    position: absolute;
+    top: 50%;
+
+    width: 0;
+    height: 0;
+    margin-top: -7.5px;
+
+    cursor: pointer;
+
+    border-style: solid;
+}
+.last-month
+{
+    left: 20px;
+
+    border-width: 7.5px 10px 7.5px 0;
+    border-color: transparent rgba(160, 159, 160, 1) transparent transparent;
+}
+
+.next-month
+{
+    right: 20px;
+
+    border-width: 7.5px 0 7.5px 10px;
+    border-color: transparent transparent transparent rgba(160, 159, 160, 1);
+}
+.week
+{
+    background: #4a4a4a;
+}
+
+.bodyborder
+{
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    border-color: transparent #424242 #424242 #424242;
+}
+
+.day
+{
+    position: relative;
+    z-index: 100;
+
+    display: inline-block;
+
+    width: 60px;
+    padding: 10px;
+
+    cursor: pointer;
+    text-align: center;
+    vertical-align: top;
+
+    background: #4a4a4a;
+}
+
+.CalendarDay ul,
+.weekday ul
+{
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+.CalendarDay ul li,
+.weekday ul li
+{
+    position: relative;
+    z-index: 100;
+
+    display: inline-block;
+
+    width: 60px;
+    padding: 10px;
+
+    cursor: pointer;
+    text-align: center;
+    vertical-align: top;
+
+    background: #4a4a4a;
+}
+.CalendarDay ul li
+{
+    font-size: 20px;
+    line-height: 1.5;
+}
+.CalendarDay ul li:hover
+{
+    background-color: #aaa;
+}
+.weekday
+{
+    color: #1cddb1;
+}
+
+.greyDay
+{
+    color: #7d7d77;
+}
+
+.currentDay
+{
+    font-weight: bold;
+
+    color: #f7a700;
+}

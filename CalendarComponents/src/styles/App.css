@@ -1,0 +1,23 @@
+/* Base Application Styles */
+*,
+*:before,
+*:after
+{
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+body
+{
+    font-family: 'HelveticaNeue-UltraLight', 'Helvetica Neue UltraLight', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: 100;
+
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+
+    color: rgba(255, 255, 255, 1);
+    background: #4a4a4a;
+}
