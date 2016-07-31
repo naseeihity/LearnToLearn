@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Redux with React</title>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.5.2/redux.min.js""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.2.1/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+    <script type="text/babel">
+
+        const {createStore} = Redux;
+        const store = createStore(counter);
+
+        const counter = (state=0, action ) =>{
+            switch (action.type) {
+                case 'INCREMENT':
+                    return state + 1;
+                case 'DECREMENT':
+                    return state - 1;
+                default:
+                    return state;
+            }
+        }
+
+        const Counter = ({
+            value,onIncrement,onDecrement
+        }) => (
+            <div>
+                <h1>{value}</h1>
+                <button onClick={onIncrement}>+</button>
+                <button onClick={onDecrement}>-</button>
+            </div>
+        );
+
+
+        const render = () => {
+            ReactDOM.render(
+                <Counter value={store.getState()}
+                         onIncrement={() =>store.dispatch({
+                            type:'INCREMENT'
+                         })}
+                         onDecrement={() =>store.dispatch({
+                            type:'DECREMENT'
+                         })} />,
+                document.getElementById('root')
+            );
+        };
+
+        store.subscribe(render);
+        render();
+
+    </script>
+</body>
+</html>
