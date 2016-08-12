@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body{
+			margin: 0 auto;
+			padding: 0;
+			background-color: #81C2D6;
+		}
+		h1 {
+			font-family: monospace;
+			font-size: 3rem;
+			text-align: center;
+			color: #fff;
+		}
+
+		picture{
+			display: block;
+			margin: 0 auto 100px;
+			width: 75%;
+			height: 100%;
+			border: 1px solid #f6f6f6;
+			overflow: hidden;
+		}
+
+		.placeholder {
+			background-color: #E0CEB8;
+			overflow: hidden;
+			position: relative;
+			padding-bottom: 66.6%;
+		}
+
+		.placeholder img{
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Image loading Without intrinsic placeholder</h1>
+	<picture data-large="http://7xr09v.com1.z0.glb.clouddn.com/lion-wild-africa-african.jpg">
+		<div class="placeholder">
+			<img src="http://7xr09v.com1.z0.glb.clouddn.com/lion-wild-africa-african.jpg" alt="" class="img_show">
+		</div>
+	</picture>
+	<p>this is a test</p>
+</body>
+</html>
