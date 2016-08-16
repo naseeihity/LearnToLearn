@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>progressive image loading</title>
+	<style>
+		body{
+			margin: 0 auto;
+			padding: 0;
+			background-color: #81C2D6;
+		}
+		h1 {
+			font-family: monospace;
+			font-size: 3rem;
+			text-align: center;
+			color: #fff;
+		}
+		figure {
+			margin: 0 auto 100px;
+			width: 75%;
+			border: 1px solid #f6f6f6;
+		}
+		.loading{
+			width: 75%;
+			margin: 0 auto;
+			padding: 200px 0;
+			text-align: center;
+			vertical-align: middle;
+			font-size: 4rem;
+			color: #fff;
+		}
+		.start_loading{
+			width: 75%;
+			margin: 0 auto;
+			padding-top: 100px;
+			padding-bottom: 200px;
+			text-align: center;
+			vertical-align: middle;
+			font-size: 4rem;
+			color: #fff;
+		}
+		.placeholder {
+			background-color: #E0CEB8;
+			-webkit-background-size: cover;
+			background-size: cover;
+			background-repeat: no-repeat;
+			position: relative;
+			overflow: hidden;
+			padding-bottom: 66.6%;
+		}
+
+		.placeholder img{
+			position: absolute;
+			opacity: 0;
+			top: 0;
+			left: 0;
+			width: 100%;
+			transition: opacity 1s linear;
+		}
+
+		.placeholder img.loaded{
+			opacity: 1;
+		}
+
+		.img_small {
+			filter: blur(50px);
+			transform: scale(1);
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Progressive Image Loading Demo</h1>
+	<p class="loading">Scroll down to see the image!</p>
+	<p class="start_loading">Start loading here!</p>
+	<figure>
+		<div class="placeholder" data-large="http://7xr09v.com1.z0.glb.clouddn.com/lion-wild-africa-african.jpg">
+			<img src="http://7xr09v.com1.z0.glb.clouddn.com/lion-wild-africa-african.jpg?imageView2/2/w/30/h/20/interlace/0/q/100" alt="" class="img_small">
+			<noscript>
+				<img class="loaded" src="http://7xr09v.com1.z0.glb.clouddn.com/lion-wild-africa-african.jpg" alt="">
+			</noscript>
+		</div>
+	</figure>
+
+	<script>
+
+		window.onload = function() {
+
+		  var placeholder = document.querySelector('.placeholder'),
+		      small = placeholder.querySelector('.img_small')
+
+		  // 1: load small image and show it
+		  var img = new Image();
+		  img.src = small.src;
+		  img.onload = function () {
+		   small.classList.add('loaded');
+		  };
+
+		  // 2: load large image
+		  var imgLarge = new Image();
+		  let observer =  new IntersectionObserver((changes) => {
+		    imgLarge.src = placeholder.dataset.large;
+		    placeholder.appendChild(imgLarge);
+		  }, {
+		  	root: null,
+		  	rootMargin: '200px'
+		  });
+		  observer.observe(placeholder);
+
+		  imgLarge.addEventListener('load', () => {
+		  	imgLarge.classList.add('loaded');
+		  	observer.unobserve(placeholder);
+		  });
+		}
+
+	</script>
+</body>
+</html>
