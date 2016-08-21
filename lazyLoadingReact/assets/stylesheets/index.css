@@ -6,25 +6,58 @@ body{
 }
 
 .content{
-	width: 80%;
-	max-width: 868px;
+	width: 88%;
+	max-width: 980px;
 	margin: 0 auto;
-}
-.content p{
-    margin-top: 180px;
-    padding: 10px;
-    font-size: 20px;
+    padding-bottom: 10rem;
 }
 h1{
-	text-align: center;
-	width: 100%;
-	color: #444;
+    font-family: "Microsoft Yahei",Hiragino Sans GB;
+    font-size: 5rem;
+    text-align: right;
+    width: 100%;
+    padding-bottom:10rem;
+    color: #444;
+}
+small{
+    display: block;
+    text-align: right;
+    color:#ccc;
+    margin-right: 30px;
+    padding-right: 10px;
+    border-right: 1px solid #ccc;
+}
+span{
+    font-size: 14px;
+    color:#d52;
+}
+a{
+    text-decoration: none;
+    font-size: 14px;
+    color:#001;
+}
+a:hover{
+    font-weight: bolder;
+    text-shadow: 1px 1px 1px #fff;
+}
+.bottomIfno{
+    margin-top: 4rem;
+    text-align: right;
+}
+.content p{
+    width: 85%;
+    margin: 0 auto;
+    padding: 10px 30px;
+    font-size: 17px;
+    font-family: Hiragino Sans GB,"STHeiti",Monaco,serif;
+    line-height: 1.8;
+    color: #aaa;
 }
 
 .placeholder{
     display: block;
-    margin: 0 auto 100px;
-    width: 75%;
+    margin: 0 auto 30px;
+    width: 90%;
     border: 1px solid #f6f6f6;
     overflow: hidden;
     background-color: #ddd;
