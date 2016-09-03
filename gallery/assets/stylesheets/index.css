@@ -40,6 +40,7 @@ body{
 
 .img_small {
     -webkit-filter:blur(50px);
+    -moz-filter:blur(50px);
     filter: blur(50px);
     transform: scale(1);
 }
