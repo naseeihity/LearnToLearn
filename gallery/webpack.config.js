@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 var path = require('path');
-require('intersection-observer');
 //定义一些地址常量,下面都是约定俗称的写法
 
 const CURRENT_PATH = path.resolve(__dirname);//当前目录
