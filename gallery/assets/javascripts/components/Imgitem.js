@@ -74,6 +74,7 @@ class Imgitem extends Component{
 					   alt={this.props.alt}
 					   id={this.props.id}
 					   className="img_small" />
+				<span>{this.props.alt}</span>
 			</div>
 		)
 	}

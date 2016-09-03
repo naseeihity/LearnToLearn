@@ -22,6 +22,7 @@ body{
     overflow: hidden;
     background-color: #ddd;
     position: relative;
+    cursor: pointer;
 }
 
 
@@ -31,7 +32,6 @@ body{
     width: 100%;
     vertical-align: bottom;
     opacity: 0;
-    transition: opacity 1s linear;
 }
 
 .placeholder img.loaded{
@@ -46,5 +46,45 @@ body{
 }
 
 i {
+    display: block;
+}
+
+.placeholder:hover .img_large{
+    transform:scale(1.2);
+}
+.img_large, .img_small, .placeholder:before, span{
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+.placeholder:before {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  background-color: rgba(52, 73, 94, 0.45);
+  z-index: 100;
+}
+.placeholder:hover:before{
+    opacity: 1;
+}
+.placeholder span{
+    color:#eee;
+    font-size: 4rem;
+    text-transform : capitalize;
+    display: none;
+    font-family: menlo;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1000;
+}
+.placeholder:hover span{
     display: block;
 }
