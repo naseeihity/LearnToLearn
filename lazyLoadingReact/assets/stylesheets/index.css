@@ -76,7 +76,6 @@ a:hover{
     top: 0;
     left: 0;
     width: 100%;
-    transition: opacity 1s linear;
 }
 
 .placeholder img.loaded{
@@ -87,4 +86,46 @@ a:hover{
     -webkit-filter:blur(50px);
     filter: blur(50px);
     transform: scale(1);
+}
+
+picture{
+    cursor: pointer;
+}
+.placeholder:hover .img_big{
+    transform:scale(1.2);
+}
+.img_big, .img_small{
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+.placeholder:before {
+  content: "";
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(52, 73, 94, 0.45);
+  z-index: 100;
+}
+picture:hover .placeholder:before{
+    display: block;
+}
+.placeholder span{
+    color:#eee;
+    font-size: 4rem;
+    text-transform : capitalize;
+    display: none;
+    font-family: menlo;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 1000;
+}
+.placeholder:hover span{
+    display: block;
 }

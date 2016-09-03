@@ -27,6 +27,7 @@ class Imgitem extends Component{
 		let observer =  new IntersectionObserver((changes) => {
 		  imgLarge.src = imgLargeSrc;
 		  imgLarge.alt = this.props.alt;
+		  imgLarge.classList.add('img_big');
 		  placeholder.appendChild(imgLarge);
 		}, {
 		    root: null,
@@ -43,13 +44,12 @@ class Imgitem extends Component{
 	render(){
 		const IMG_S = "?imageView2/2/w/30/h/20/interlace/0/q/100";
 		return(
-			<picture>
-				<div className="placeholder">
-					<img src={this.props.src + IMG_S}
-						   alt={this.props.alt}
-						   id={this.props.id}
-						   className="img_small" />
-				</div>
+			<picture className="placeholder">
+				<img src={this.props.src + IMG_S}
+					   alt={this.props.alt}
+					   id={this.props.id}
+					   className="img_small" />
+				<span>{this.props.alt}</span>
 			</picture>
 		)
 	}

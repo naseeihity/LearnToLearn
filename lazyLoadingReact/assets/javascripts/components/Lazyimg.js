@@ -12,7 +12,7 @@ class Lazyimg extends Component{
 							<Imgitem alt={img.alt} src={img.src} key={key} id={key} />
 						);
 			return (
-				<div>
+				<div className="img_box">
 					{imgItems}
 				</div>
 			);
