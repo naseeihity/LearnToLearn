@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <title>Rating</title>
+    <style>
+        .fa-star{
+            color: #FFB712;
+        }
+        .fa-star-o{
+            color: #BCBCBC;
+        }
+        i{
+             margin-right: 0px;
+             float: left;
+             /*内联元素浏览器会把换行作为文本节点,导致元素间会产生间隙,这样可以去掉间隙;如果
+             是block元素则还需将其设为display:inline*/
+        }
+        i:hover{
+            cursor: pointer;
+        }
+        span{
+            line-height: 30px;
+            display: block;
+        }
+        #rateword{
+            font-size: 30px;
+        }
+        #stars{
+            vertical-align:text-bottom;
+        }
+    </style>
+</head>
+<body>
+    <span id="rating">
+        <span id="stars">
+               <i class="fa  fa-2x fa-star-o"></i>
+               <i class="fa  fa-2x fa-star-o"></i>
+               <i class="fa  fa-2x fa-star-o"></i>
+               <i class="fa  fa-2x fa-star-o"></i>
+               <i class="fa  fa-2x fa-star-o"></i>
+        </span>
+            <span id="rateword" class="pl"></span>
+            <input id="n_rating" value="5" name="rating" type="hidden">
+    </span>
+
+    <script src="../jquery-2.1.4.js"></script>
+    <script>
+        var rateword = ["很差","较差","一般","推荐","力荐"];
+        var num =1;
+        $(function(){
+            // $("#stars i").slice(0,num).addClass('fa-star').removeClass('fa-star-o');
+            $('#stars i:lt('+num+')').addClass('fa-star').removeClass('fa-star-o');
+            $("#rateword").text(rateword[num-1]);
+        })
+
+        $("#stars i").hover(function() {
+            $("#stars").removeClass('done');
+            $(this).removeClass('fa-star-o').addClass('fa-star');
+            $(this).prevAll('i').addClass('fa-star').removeClass('fa-star-o');
+            $(this).nextAll('i').addClass('fa-star-o').removeClass('fa-star');
+            $("input").val($(this).index());
+            $("#rateword").text(rateword[$(this).index()]);
+        }, function() {
+                if(!$("#stars").hasClass('done')){
+                $('#stars>i').addClass('fa-star-o').removeClass('fa-star');
+                $("#rateword").text("");
+            }
+        });
+
+        $("#stars i").click(function(event) {
+            $("#stars").addClass('done');
+            num=$(this).index();
+        });
+    </script>
+</body>
+</html>
+

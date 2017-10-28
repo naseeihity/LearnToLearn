@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>side bar</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 250px;
+            background-color: #389DFF;
+            position: absolute;
+            left: -100px;
+        }
+        #div1 span{
+            width: 20px;
+            height: 60px;
+            background-color: #35C977;
+            position: absolute;
+            right: -20px;
+            top: 70px;
+            line-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"><span>分享到.</span></div>
+
+    <script>
+        window.onload = function(){
+            var oDiv = document.getElementById('div1');
+
+            oDiv.onmouseover=function(){
+                startmove(0);
+            }
+            oDiv.onmouseout=function(){
+                startmove(-100);
+            }
+
+        }
+        var timer= null;
+
+        function startmove (iTarget) {
+            var oDiv = document.getElementById('div1');
+            clearInterval(timer);
+            timer = setInterval(function(){
+                var speed = 0;
+                if(oDiv.offsetLeft > iTarget){
+                    speed=-10;
+                }
+                else{
+                    speed=10;
+                };
+
+                if (oDiv.offsetLeft===iTarget){
+                    clearInterval(timer);
+                }
+                else{
+                     oDiv.style.left = oDiv.offsetLeft+speed+'px';
+                };
+
+            }, 30)
+        }
+    </script>
+</body>
+</html>

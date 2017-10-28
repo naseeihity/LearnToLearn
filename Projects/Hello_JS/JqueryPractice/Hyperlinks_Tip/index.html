@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hyperlinks</title>
+</head>
+<body>
+    <head>HTML的title属性作为超链接的提示是框反应过慢,用Jquery编写替代.</head>
+    <p><a href="#" class="tooltip" title="This is a tip">TIP 1</a></p>
+    <p><a href="#" class="tooltip" title="This is another tip">TIP 2</a></p>
+
+
+    <script src="../jquery-2.1.4.js"></script>
+    <script>
+        $(function(){
+            $("a.tooltip").mouseover(function(e){
+                // display
+                this.myTitle = this.title;
+                this.title = "";
+                var tooltip = "<div id='tooltip'>"+this.myTitle+"</div>";
+                $("body").append(tooltip);
+                $("#tooltip").css(
+                                {
+                                    "position":"absolute",
+                                    "top":e.pageY+20+"px",
+                                    "left":e.pageX+10+"px",
+                                    "backgroundColor":"#F8FF70"
+                                }).show("fast");
+            }).mouseout(function(){
+                $("#tooltip").remove();
+                this.title = this.myTitle;
+            });
+
+            $("a.tooltip").mousemove(function(e){
+                $("#tooltip").css(
+                                {
+                                    "top":e.pageY+20+"px",
+                                    "left":e.pageX+10+"px",
+                                });
+            });
+        })
+
+    </script>
+</body>
+</html>

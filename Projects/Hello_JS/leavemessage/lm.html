@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LeaveMessage</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        body{
+            background-color: #1d2025;
+        }
+        nav{
+            color:white;
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 30px auto 0;
+            width: 400px;
+            resize: none;
+            text-align: center;
+            font-family: "Impact";
+        }
+        #ul1{
+            width:400px;
+            height:400px;
+            border: 1px solid #ececec;
+            margin: 10px auto;
+            overflow: hidden;
+        }
+        #ul1 li{
+            border-bottom: 1px #999 dashed;
+            padding: 4px;
+            list-style: none;
+            color: #00ff80;
+            font-size: 1em;
+            overflow: hidden;
+            opacity: 0;
+        }
+        #welcome{
+            opacity: 100;
+        }
+        textarea{
+            display: block;
+            margin: 20px auto 0;
+            width:400px;
+            resize: none;
+            color: #acd0ce;
+            font-size: 1.2em;
+            background-color:  transparent;
+        }
+        input{
+            display: block;
+            margin:10px auto;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>LeaveMessage</nav>
+    <textarea id="txt1" rows="5" cols="40"></textarea>
+    <input type="button"  value="send" id="btn1">
+    <ul id="ul1">
+    <li id="welcome" style="opacity:100">Welcome to leave your message!</li>
+    </ul>
+
+    <script src="move.js"></script>
+    <script>
+    window.onload = function(){
+        var oBtn = document.getElementById('btn1');
+        var oUl = document.getElementById('ul1');
+        var oTxt = document.getElementById('txt1');
+
+        oBtn.onclick = function(){
+            var oLi = document.createElement('li');
+            oLi.innerHTML = oTxt.value;
+            oTxt.value='';
+
+            if(oUl.children.length>0){
+                oUl.insertBefore(oLi, oUl.children[0]);
+            }
+            else{
+                oUl.appendChild(oLi);
+            }
+         //move
+            var iHeight = oLi.offsetHeight;
+            oLi.style.height = 0;
+            startmove(oLi,{height:iHeight},function(){
+                startmove(oLi,{opacity:100});
+            });
+        }
+    }
+    </script>
+</body>
+</html>

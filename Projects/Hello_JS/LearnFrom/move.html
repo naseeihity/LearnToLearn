@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>uniform motion</title>
+    <style>
+        #circle {
+        width: 100px;
+        height: 100px;
+        background-color: #a72525;
+        border-radius: 50px;
+        /*position的默认属性static不受left等影响*/
+        position: absolute;
+        margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" id="start" value="Start">
+    <input type="button" id="restart" value="Restart">
+    <br>
+    <div id="circle"></div>
+
+
+    <script>
+    window.onload = function(){
+        var timer=null;
+        var oBtn1 = document.getElementById('start');
+        var oBtn2 = document.getElementById('restart');
+        var oDiv = document.getElementById('circle');
+
+        oBtn1.onclick =  function startmove() {
+            clearInterval(timer);
+            var speed =1;
+
+                if (oBtn1.value === "Start"){
+                    oBtn1.value= "Stop";
+                    timer=setInterval(function(){
+                        if(oDiv.offsetLeft>1200){
+                            clearInterval(timer);
+                        }
+                        else{
+                            oDiv.style.left = oDiv.offsetLeft+speed+'px';
+                        }
+                    }, 30);
+                }
+                else{
+                    oBtn1.value= "Start";
+                    clearInterval(timer);
+                }
+        }
+        oBtn2.onclick = function  () {
+            clearInterval(timer);
+            oDiv.style.left = 0;
+            if (oBtn1.value === "Stop") {
+                oBtn1.value = "Start";
+            }
+        }
+
+    }
+    </script>
+</body>
+</html>

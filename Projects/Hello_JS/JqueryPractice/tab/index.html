@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab</title>
+    <style>
+        *{
+            margin: 0  auto;
+        }
+        body{
+            width: 1080px;
+            margin: 20px auto;
+            background-color: #2C3E50;
+        }
+        .tab{
+            width:500px;
+            height: 300px;
+            background-color: #F5F5F5;
+            position: relative;
+        }
+        .tabmenu li{
+            display: inline-block;
+            list-style: none;
+            background-color: #fff;
+            border: 1px solid #111;
+        }
+
+        .tabmenu li:hover { cursor: pointer; }
+        ul{
+            padding-top: 2px;
+            padding-left: 24px;
+        }
+        .tabbox{
+            margin-top: 5px;
+            width:450px;
+            height:260px;
+            border: 1px solid #111;
+            background-color: #fff;
+        }
+        ul .selected{
+            background-color: #9ce;
+            color: #fff;
+        }
+        .hidden{
+            display: none;
+        }
+        .tblist{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab">
+        <div class="tabmenu">
+            <ul>
+                <li class="tablist">时事</li>
+                <li class="tablist">体育</li>
+                <li class="tablist">娱乐</li>
+            </ul>
+        </div>
+
+        <div class="tabbox">
+            <div class="tblist">时事</div>
+            <div class="tblist">体育</div>
+            <div class="tblist">娱乐</div>
+        </div>
+    </div>
+    <script src="../jquery-2.1.4.js"></script>
+    <script src="tab.js"></script>
+    <script>
+        tab({
+            element: '.tab', //父级元素
+            triggers: '.tabmenu ul li', //操作的元素
+            contents: '.tabbox div',//要控制的元素
+            activeIndex:1,//初始化触发的元素
+            selectTrig:'selected',//传入触发后的样式(class)
+            triggerType:'hover',//触发方式
+            onSwitch: function(index, count){
+                //this为当前显示的内容的dom元素
+                this.innerHTML += '<br>一共'+ count +'个,当前'+ (index + 1);
+            }//触发后的回调函数
+        });
+    </script>
+</body>
+</html>

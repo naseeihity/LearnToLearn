@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Practice</title>
+</head>
+<body>
+    name: <input type="text" id="name">
+    age: <input type="text" id="age">
+    <input type="button" value="add" id="btn1">
+    <br>
+    <input type="text" id="txt" style="width:360px">
+    <input type="button"  value="Search" id="btn2">
+    <br>
+    <input type="button" value="sort" id="btn3">
+    <table id="tab1" border="1" width="430">
+        <thead>
+            <td>ID</td>
+            <td>Name</td>
+            <td>age</td>
+            <td>operate</td>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Bob</td>
+                <td>32</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Jim</td>
+                <td>21</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Lee</td>
+                <td>23</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Pal</td>
+                <td>41</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Dennd</td>
+                <td>11</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    <script>
+    window.onload = function(){
+        var oTab = document.getElementById('tab1');
+        var oBtn =  document.getElementById('btn1');
+        var oName = document.getElementById('name');
+        var oAge = document.getElementById('age');
+        var id = oTab.tBodies[0].rows.length+1;
+
+        // add or delete a new row
+        oBtn.onclick = function(){
+            var oTr = document.createElement('tr');
+
+            var oTd = document.createElement('td');
+            oTd.innerHTML = id++;
+            oTr.appendChild(oTd);
+
+            var oTd = document.createElement('td');
+            oTd.innerHTML = oName.value;
+            oTr.appendChild(oTd);
+
+            var oTd = document.createElement('td');
+            oTd.innerHTML = oAge.value;
+            oTr.appendChild(oTd);
+
+            var oTd = document.createElement('td');
+            oTd.innerHTML = '<a href="javascript:;">Delete</a>';
+            oTr.appendChild(oTd);
+
+            oTd.getElementsByTagName('a')[0].onclick = function () {
+                oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+                 };
+            oTab.tBodies[0].appendChild(oTr);
+        };
+        //change color
+        var oldColor= '';
+        for (var i = 0; i < oTab.tBodies[0].rows.length; i++) {
+            if(i%2){
+                oTab.tBodies[0].rows[i].style.background='#ccc';
+            }
+
+            oTab.tBodies[0].rows[i].onmouseover = function(){
+                oldColor =this.style.background;
+                this.style.background='#daa';
+            };
+            oTab.tBodies[0].rows[i].onmouseout = function(){
+                this.style.background=oldColor;
+            };
+
+
+        }
+
+        //search
+
+        var oBtn2 = document.getElementById('btn2');
+        oBtn2.onclick = function(){
+            for (var i = 0; i < oTab.tBodies[0].rows.length; i++) {
+                var inTxt = document.getElementById('txt').value.toUpperCase();
+                var tbTxt = oTab.tBodies[0].rows[i].cells[1].innerHTML.toUpperCase();
+                var arr = inTxt.split('');
+                oTab.tBodies[0].rows[i].style.background = '';
+                for (var j = 0; j < arr.length; j++) {
+                    if (tbTxt.search(arr[j])!=-1){
+                         oTab.tBodies[0].rows[i].style.background = 'yellow';
+                    }
+                    // else{
+                    //     oTab.tBodies[0].rows[i].style.background = '';
+                    // }
+                };
+            };
+
+        }
+
+        //sort
+        var oBtn3 = document.getElementById('btn3');
+        oBtn3.onclick = function(){
+            var arr = Array.prototype.slice.call(oTab.tBodies[0].rows);
+            arr.sort(function(tr1,tr2){
+                var n1= parseInt(tr1.cells[0].innerHTML);
+                var n2= parseInt(tr2.cells[0].innerHTML);
+                return n1-n2;
+            });
+
+            for (var i = 0; i < arr.length; i++) {
+                oTab.tBodies[0].appendChild(arr[i]);
+            };
+        }
+
+    }
+    </script>
+</body>
+</html>

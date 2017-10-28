@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Hyperlinks</title>
+    <style>
+        *{
+            margin: 0 auto;
+        }
+        body{
+            width: 1080px;
+            background-color: #5F6678;
+        }
+        li{
+            list-style: none;
+            display: inline-block;
+        }
+        a{
+            display: inline-block;
+        }
+        img{
+            width: 200px;
+            height: 200px;
+            padding: 10px;
+            margin-top: 40px;
+            border:0;
+        }
+        a:active{outline:none;star:expression_r(this.onFocus=this.blur());}
+
+        .bigPic{
+            display: none;
+            z-index: -1;
+        }
+        .original {
+            z-index: 120;
+            display: block;
+            /*保持原有尺寸比例。保证替换内容尺寸一定可以在容器里面放得下*/
+            object-fit: contain;
+            -webkit-transition: opacity 0.2s;
+            transition: opacity 0.2s;
+            -webkit-backface-visibility: hidden;
+        }
+        .preview {
+            /*相对body定位*/
+            position: fixed;
+            /*在顶层*/
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            /*弹性布局,是页面内的元素全部居中对齐*/
+            display: -webkit-flex;
+            display: -ms-flex;
+            display: flex;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -ms-flex-line-pack: center;
+            -webkit-align-content: center;
+            align-content: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            background: #5F6678;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li><a class="piclist" href="img/1.svg" title="story"><img src="img/1.png" alt="story"></a></li>
+        <li><a class="piclist" href="img/2.svg" title="distrust"><img src="img/2.png" alt="distrust"></a></li>
+        <li><a class="piclist" href="img/3.svg" title="cold"><img src="img/3.png" alt="cold"></a></li>
+        <li><a class="piclist" href="img/4.svg" title="real"><img src="img/4.png" alt="real"></a></li>
+    </ul>
+    <div class="bigPic"></div>
+
+
+    <script src="../jquery-2.1.4.js"></script>
+    <script>
+        $(function(){
+            $("a").mouseover(function(e){
+                // display
+                this.myTitle = this.title;
+                this.title = "";
+                var tooltip = "<div id='tooltip'>"+this.myTitle+"</div>";
+                $("body").append(tooltip);
+                $("#tooltip").css(
+                                {
+                                    "position":"absolute",
+                                    "top":e.pageY+20+"px",
+                                    "left":e.pageX+10+"px",
+                                    "padding":2+"px",
+                                    "backgroundColor":"#def2a7",
+                                    "opacity":0.7
+                                }).show("fast");
+            }).mouseout(function(){
+                $("#tooltip").remove();
+                this.title = this.myTitle;
+            });
+
+            $("a").mousemove(function(e){
+                $("#tooltip").css(
+                                {
+                                    "top":e.pageY+20+"px",
+                                    "left":e.pageX+10+"px",
+                                });
+            });
+
+            $("a.piclist").click(function(e){
+                var preview = "<img src='"+this.href+"' alt='previewPic'>";
+                $(".bigPic").append(preview);
+                $(".bigPic").addClass("preview original");
+
+                return false;
+
+            });
+
+            $(".bigPic").click(function(){
+                $(".bigPic img").remove();
+                $(".bigPic").removeClass("preview original");
+            })
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+html{
+    font-size: 20px;
+}
+body{
+    font-family: Arial;
+
+}
+header{
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+header h1{
+    font-size: 2rem;
+    font-weight: bold;
+    color:#F5B977;
+    margin:1rem 0 0.5rem;
+}
+
+header #newgameBtn{
+    display: block;
+    margin:.5rem auto;
+    width: 6.5rem;
+    padding: .5rem;
+    background-color: #8f7a66;
+    color: #fff;
+    border-radius: .5rem;
+    text-decoration: none;
+}
+header a{
+    padding:0;
+    margin:0;
+}
+
+header #newgameBtn:hover{
+    background-color: #9f8b77;
+    font-weight: bold;
+}
+
+header p{
+    font-size: 1rem;
+    margin:.5rem auto;
+
+}
+header p span{
+    color:#F49484;
+    font-size: 1.3rem;
+    padding:0.1em;
+    vertical-align: middle;
+}
+
+#grid-container{
+    position: relative;
+    width:480px;
+    height: 480px;
+    padding:10px;
+    margin:10px auto;
+    background-color: #bbada0;
+    border-radius: 10px;
+}
+.grid-cell{
+    position: absolute;
+    width: 100px;
+    height:100px;
+    border-radius: 10px;
+    background-color: #ccc0b3;
+}
+
+.number-cell{
+    position: absolute;
+    font-weight: bold;
+    font-size: 60px;
+    line-height: 100px;
+    text-align: center;
+    border-radius:10px;
+}
+
+
+
+.overplay{
+    background:transparent url(overplay.png) repeat top left;
+    position:fixed;
+    top:0px;
+    bottom:0px;
+    left:0px;
+    right:0px;
+    z-index:100;
+    display:none;
+}
+
+.box{
+    position:fixed;
+    top:-200px;
+    margin:auto;left:0; right:0;
+    height:100px;
+    width:300px;
+    background-color: #fff;
+    color:#EAB171;
+    padding:1rem;
+    border:2px solid #ccc;
+    -moz-border-radius: 10px;
+    -webkit-border-radius:10px;
+    -khtml-border-radius:10px;
+    z-index:101;
+}
+a.boxclose{
+    float: right;
+    width: 2rem;
+    height:2rem;
+    background: transparent url(close.png) no-repeat;
+    cursor: pointer;
+    margin-top: -1rem;
+    margin-right: -1rem;
+}
+.box h1{
+    text-align: center;
+    border-bottom: 1px dashed #7F7F7F;
+    margin:-1rem -1rem 0px -1rem;
+    padding:0.5rem;
+    background-color:#FFEFEF;
+    color:#EF7777;
+    -moz-border-radius:10px 10px 0px 0px;
+    -webkit-border-top-left-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -khtml-border-top-left-radius: 10px;
+    -khtml-border-top-right-radius: 10px;
+}
+.box p{
+    margin-bottom:0;
+    text-align: center;
+}
+.box p span{
+    font-weight: bold;
+    color: #EF7777;
+}

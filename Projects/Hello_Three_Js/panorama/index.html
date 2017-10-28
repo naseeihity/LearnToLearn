@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>spherePicShow</title>
+    <style>
+        body{
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container"></div>
+    <script src="three.js"></script>
+    <script src="CSS3DRenderer.js"></script>
+
+    <script>
+
+        var camera, scene, render;
+
+        var target = new THREE.Vector3();
+
+        var lon = 0, lat = 0;
+        var phi = 0, theta = 0;
+
+        var touchX, touchY;
+
+        init();
+        animate();
+
+        function init(){
+            //初始化场景
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,0.1,1000);
+
+            render = new THREE.CSS3DRenderer();
+            render.setSize(window.innerWidth, window.innerHeight );
+            document.body.appendChild(render.domElement );
+            //存储各个图片
+            var faces = [
+                {
+                    url: 'quanjing09_f.jpg',
+                    position: [ -512, 0, 0 ],
+                    rotation: [ 0, Math.PI / 2, 0 ]
+                },
+                {
+                    url: 'quanjing09_b.jpg',
+                    position: [ 512, 0, 0 ],
+                    rotation: [ 0, -Math.PI / 2, 0 ]
+                },
+                {
+                    url: 'quanjing09_u.jpg',
+                    position: [ 0,  512, 0 ],
+                    rotation: [ Math.PI / 2, 0, Math.PI ]
+                },
+                {
+                    url: 'quanjing09_d.jpg',
+                    position: [ 0, -512, 0 ],
+                    rotation: [ - Math.PI / 2, 0, Math.PI ]
+                },
+                {
+                    url: 'quanjing09_l.jpg',
+                    position: [ 0, 0,  512 ],
+                    rotation: [ 0, Math.PI, 0 ]
+                },
+                {
+                    url: 'quanjing09_r.jpg',
+                    position: [ 0, 0, -512 ],
+                    rotation: [ 0, 0, 0 ]
+                }
+            ];
+            // 用图片构建出该物体
+            for (var i = 0; i < faces.length; i++) {
+                var face = faces[i];
+
+                var image = document.createElement('img');
+                image.width = 1030;
+                image.src = face.url;
+
+                var object = new THREE.CSS3DObject(image);
+                object.position.fromArray(face.position);
+                object.rotation.fromArray(face.rotation);
+                scene.add(object);
+            }
+
+                document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+                document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
+
+                document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+                document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+
+                window.addEventListener( 'resize', onWindowResize, false );
+            }
+
+            function onWindowResize() {
+
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+
+                render.setSize( window.innerWidth, window.innerHeight );
+
+            }
+
+            //鼠标事件
+            function onDocumentMouseDown( event ) {
+
+                event.preventDefault();
+
+                document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+                document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+            }
+            function onDocumentMouseMove(){
+
+                var movementX = event.movementX || 0;
+                var movementY = event.movementY || 0;
+                //水平和垂直旋转
+                lon -=movementX*0.1;
+                lat +=movementY*0.1;
+            }
+            function onDocumentMouseUp( event ) {
+
+                document.removeEventListener( 'mousemove', onDocumentMouseMove );
+                document.removeEventListener( 'mouseup', onDocumentMouseUp );
+
+            }
+            //鼠标滚轮调整视角
+            function onDocumentMouseWheel( event ) {
+
+                camera.fov = Math.max(10,Math.min(110,camera.fov-event.wheelDeltaY * 0.05));
+                camera.updateProjectionMatrix();
+
+            }
+
+            //触摸事件
+            function onDocumentTouchStart( event ) {
+
+                event.preventDefault();
+
+                var touch = event.touches[ 0 ];
+
+                touchX = touch.screenX;
+                touchY = touch.screenY;
+
+            }
+
+            function onDocumentTouchMove( event ) {
+
+                event.preventDefault();
+
+                var touch = event.touches[ 0 ];
+
+                lon -= ( touch.screenX - touchX ) * 0.1;
+                lat += ( touch.screenY - touchY ) * 0.1;
+
+                touchX = touch.screenX;
+                touchY = touch.screenY;
+
+            }
+
+            //动画
+            function animate(){
+
+                requestAnimationFrame(animate);
+                //自动在水平方向上缓慢旋转
+                // lon += 0.01;
+                //限制仰角在-85度到85度之间
+                lat = Math.max(-85,Math.min(85,lat));
+                //将旋转的角度转换为弧度的表示方法
+                phi = THREE.Math.degToRad(90-lat);
+                theta = THREE.Math.degToRad(lon);
+
+                //使用三角函数得到视角位置坐标,用一个单位三维矢量来存储
+                target.x = Math.sin(phi) * Math.cos(theta);
+                target.y = Math.cos(phi);
+                target.z = Math.sin(phi)*Math.sin(theta);
+
+                camera.lookAt(target);
+
+                render.render(scene,camera);
+
+            }
+    </script>
+
+</body>
+</html>

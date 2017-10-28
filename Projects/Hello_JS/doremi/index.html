@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SevenMove</title>
+    <style>
+        body{
+            margin: 0 auto;
+            padding: 0;
+            width: 1000px;
+            background-color: #565B6D;
+        }
+        nav{
+            text-align: center;
+            margin: 30px;
+            font-weight: bold;
+            color: #ccc;
+            font-size: 2.75em;
+        }
+        p{
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.5em;
+        }
+        .block{
+            width: 100px;
+            height: 50px;
+            margin: 20px;
+            vertical-align: center;
+            padding-left: 20px;
+            line-height: 50px;
+            font-weight: bold;
+            color: #fff;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <nav>A Beautiful Move Demo</nav>
+    <p>鼠标移入或数字1~7控制</p>
+    <div class="block" style="background-color:#93e887">Do</div>
+    <div class="block" style="background-color:#fff586">Re</div>
+    <div class="block" style="background-color:#ff7438">Mi</div>
+    <div class="block" style="background-color:#ff4238">Fa</div>
+    <div class="block" style="background-color:#ad9876">So</div>
+    <div class="block" style="background-color:#4d939f">La</div>
+    <div class="block" style="background-color:#b06e93">Xi</div>
+
+    <audio class="music" src="1.mp3" controls="controls" loop="false" hidden="true">
+    <audio class="music" src="2.mp3" controls="controls" loop="false" hidden="true">
+    <audio class="music" src="3.mp3" controls="controls" loop="false" hidden="true">
+    <audio class="music" src="4.mp3" controls="controls" loop="false" hidden="true">
+    <audio class="music" src="5.mp3" controls="controls" loop="false" hidden="true">
+    <audio class="music" src="6.mp3" controls="controls" loop="false" hidden="true">
+    <audio class="music" src="7.mp3" controls="controls" loop="false" hidden="true">
+
+    <script>
+        window.onload = function(){
+            oM = document.getElementsByClassName('music');
+            oDiv = document.getElementsByTagName('div');
+            for (let i = 0; i < oDiv.length; i++) {
+                oDiv[i].timer = null;
+                oDiv[i].onmouseover = function(){
+                    startmove(this,{width:800,opacity:100});
+                    this.style.fontSize = '2em';
+                    oM[i].currentTime = 0;
+                    oM[i].play();
+                };
+                oDiv[i].onmouseout =  function(){
+                    startmove(this,{width:100,opacity:30});
+                    this.style.fontSize = '1em';
+                    oM[i].pause();
+                };
+            };
+
+        }
+
+
+        function startmove (obj,mlist) {
+            clearInterval(obj.timer);
+            obj.timer = setInterval(function(){
+                var flag = 1;
+
+                for(name in mlist){
+                    var tValue = 0;
+                    if (name === 'opacity'){
+                        tValue = Math.round(parseFloat((window.getComputedStyle(obj,null))[name])*100);
+                    }
+                    else{
+                         tValue = parseInt((window.getComputedStyle(obj,null))[name]);
+                    }
+
+                    var speed = (mlist[name]-tValue)/8;
+                        speed = speed>0 ? Math.ceil(speed)*1.5: Math.floor(speed)*0.5;
+                    if (tValue != mlist[name]){
+                        flag = 0;
+                    }
+                        if (name === 'opacity'){
+                            obj.style.opacity = (tValue + speed)/100;
+                        }
+                        else{
+                            obj.style[name] = tValue + speed +'px';
+                        }
+                }
+                if (flag){
+                    clearInterval(obj.timer);
+                }
+            }, 30);
+        }
+
+        document.onkeydown = function(ev){
+            var oEvent = ev || event;
+            var oDiv = document.getElementsByTagName('div');
+            var num = oEvent.keyCode-49+'';
+            var numzz = /^[0-6]{1}$/;
+            if (numzz.test(num)){
+                startmove(oDiv[num],{width:800,opacity:100});
+                oDiv[num].style.fontSize = '2em';
+                oM[num].currentTime = 0;
+                oM[num].play();
+            }
+        }
+
+        document.onkeyup = function(ev){
+            var oEvent = ev || event;
+            var oDiv = document.getElementsByTagName('div');
+            var num = oEvent.keyCode-49+'';
+            var numzz = /^[0-6]{1}$/;
+            if (numzz.test(num)){
+                startmove(oDiv[num],{width:100,opacity:30});
+                oDiv[num].style.fontSize = '1em';
+                oM[num].pause();
+            }
+        }
+    </script>
+</body>
+</html>

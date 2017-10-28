@@ -1,8 +1,0 @@
-{
-  "generator-react-webpack": {
-    "appName": "learnReact",
-    "style": "sass",
-    "postcss": true,
-    "generatedWithVersion": 3
-  }
-}

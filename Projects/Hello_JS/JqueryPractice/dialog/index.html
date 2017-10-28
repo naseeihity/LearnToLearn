@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dialog</title>
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <style>
+        .dialog{
+            /*display: none;*/
+            width: 400px;
+            height: 200px;
+            border: 6px solid #D1D1D1;
+            display: none;
+            position: absolute;
+        }
+        h3{
+            margin: 0;
+            padding: 4px;
+        }
+        .topmenu{
+            width: 400px;
+            height: 40px;
+            border-bottom: 1px solid #d1d1d1;
+            position: relative;
+            background-color: #FAFAFA;
+        }
+        i{
+            position: absolute;
+            top:4px;
+            right: 8px;
+        }
+        i:hover{
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>弹出层</h1>
+    <button id="btn">弹</button>
+    <div class="dialog">
+        <div class="topmenu">
+            <h3>这是弹出层</h2>
+            <i class="fa fa-close fa-2x"></i>
+        </div>
+        <div class="content">
+        </div>
+    </div>
+
+
+    <script src="../jquery-2.1.4.js"></script>
+    <script>
+    function dialog(options){
+
+        options = $.extend({
+            trigger: '#btn',
+            content: '<strong>content</strong>',
+            effectShow: function ($element) {
+                   // 淡入显示
+                   $element.fadeIn(500)
+               },
+            effectHide: function ($element) {
+               // 淡出显示
+               $element.fadeOut(500,function (element) {
+                alert("Closed");
+            })
+           }
+        },options || {});
+
+        var $window = $(window);
+        var $div = $(".dialog");
+        var $contbox = $(".dialog .content")
+
+        $btn = $(options.trigger);
+        $content = $(options.content);
+
+        $btn.on("click",function(){
+            $div.css({
+                    left: ($window.width() - $div.width())/2,
+                    top: ($window.height() - $div.height())/2,
+            });
+            $contbox.html($content);
+            options.effectShow($div);
+        });
+        $(".fa-close").click(function(){
+            options.effectHide($div);
+            // if(!$div.is(":animated")){
+            //     options.onClose(window);
+            // }
+
+        });
+
+        $(document).on('keydown.dialog', function(event){
+                       if(event.keyCode === 27){
+                           $(".fa-close").triggerHandler('click');
+                       }
+                   });
+
+    }
+
+    dialog({
+        trigger: '#btn',
+        content: '<strong>哈哈</strong>',
+        effectShow: function ($element) {
+               // 淡入显示
+               $element.fadeIn(500)
+           },
+           effectHide: function ($element) {
+               // 淡出显示
+               $element.fadeOut(500,function () {
+                alert("Closed");
+            })
+           },
+
+    });
+    </script>
+</body>
+</html>
