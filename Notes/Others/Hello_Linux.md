@@ -25,3 +25,29 @@
 - `CTRL + E`: 移动到行末
 - `CTRL + C`: 终止当前任务
 - `CTRL + Z`: 把当前任务放到后台运行（相当于运行命令时后面加&）
+
+## Linux下挂载exfat盘
+
+```
+sudo su  
+add-apt-repository ppa:relan/exfat  
+apt-get update  
+apt-get install exfat-utils  
+```
+
+## Ubuntu 14.04下安装Qt5
+
+`sudo apt-get update` 
+`sudo apt-get install libqt4-dev libqtwebkit-dev`
+`sudo apt-get install qt5-default libqt5webkit5-dev gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x`
+
+如果qmake还是找不到，需要在环境变量里把qmake和最新版本的qt里的qmake关联起来
+
+```
+which qmake # to see where it links
+rm `which qmake` # IF it is linking to an old version 
+```
+
+## linux修改文件权限
+
+sudo chmod -R 777 files/
